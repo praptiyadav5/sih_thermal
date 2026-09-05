@@ -1,0 +1,1 @@
+# ANSYS mechanical module initializer

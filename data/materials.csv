@@ -1,0 +1,15 @@
+id,name,category,conductivity_k,density_rho,specific_heat_cp,emissivity,solar_absorptivity,cost_index,description
+mud_brick,Traditional Mud Brick (Sun-Dried),Masonry,0.75,1800,880,0.90,0.70,1.0,High thermal mass traditional material used in Ladakh (Trombe walls)
+ceb,Compressed Earth Block (CEB),Masonry,0.95,1950,920,0.88,0.65,1.5,Stabilized earth block offering good thermal mass and structural stability
+stone_masonry,Granite / Slate Stone Masonry,Masonry,2.20,2600,840,0.92,0.75,2.0,Abundant local stone material; high thermal conductivity requiring insulation
+concrete,Reinforced Concrete,Concrete,1.50,2300,900,0.90,0.60,2.5,Standard structural concrete with high density and strength
+xps_insulation,Extruded Polystyrene (XPS),Insulation,0.032,35,1450,0.90,0.30,3.5,Closed-cell moisture-resistant thermal insulation board
+eps_insulation,Expanded Polystyrene (EPS),Insulation,0.038,25,1300,0.90,0.30,2.5,Cost-effective lightweight cellular plastic thermal insulation
+pu_foam,Polyurethane (PU) Foam Board,Insulation,0.024,32,1400,0.90,0.30,4.2,High-performance rigid foam insulation with very low thermal conductivity
+mineral_wool,Rock Mineral Wool,Insulation,0.035,80,840,0.90,0.30,3.0,Fire-resistant fiber insulation with excellent acoustic & thermal properties
+timber_wood,Deodar Cedar / Spruce Wood,Timber,0.13,520,1600,0.85,0.50,3.8,Natural timber offering good structural strength and moderate insulation
+vip_panel,Vacuum Insulated Panel (VIP),Insulation,0.007,200,800,0.90,0.20,9.0,Ultra-thin super insulation panel with extremely low thermal conductivity
+double_glass,Double Glazed Low-E Window,Glazing,1.60,2500,840,0.84,0.15,4.5,Double pane argon filled glass unit with low-emissivity coating (SHGC: 0.62)
+triple_glass,Triple Glazed Vacuum Window,Glazing,0.80,2500,840,0.84,0.10,7.0,High altitude triple pane glazing with vacuum space (SHGC: 0.50)
+straw_bale,Compressed Straw Bale,Bio-Based,0.06,110,2000,0.90,0.60,1.2,Agricultural byproduct providing thick eco-friendly thermal envelope
+metal_sheet,Corrugated Galvanized Steel Sheet,Cladding,50.0,7850,460,0.25,0.40,2.0,External weather-proofing sheet metal cladding
