@@ -95,13 +95,18 @@ fig_temp = go.Figure()
 fig_temp.add_trace(go.Scatter(x=df_ts['time'], y=df_ts['indoor_temp'], mode='lines+markers', name='Predicted Indoor Temp (°C)', line=dict(color='#00F0FF', width=3)))
 fig_temp.add_trace(go.Scatter(x=df_ts['time'], y=df_ts['outdoor_temp'], mode='lines', name='Outdoor Ambient Temp (°C)', line=dict(color='#FF4B4B', width=2, dash='dash')))
 
-fig_temp.add_hrect(y0=18.0, y1=24.0, fillcolor="rgba(16, 185, 129, 0.15)", line_width=0, annotation_text="Thermal Comfort Zone (18-24°C)", annotation_position="top left")
+fig_temp.add_hrect(
+    y0=18.0, y1=24.0, fillcolor="rgba(16, 185, 129, 0.15)", line_width=0,
+    annotation_text="Thermal Comfort Zone (18-24°C)", annotation_position="top left",
+    annotation_font=dict(color="#34D399", size=12)
+)
 
 fig_temp.update_layout(
     height=420,
     template="plotly_dark",
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(15, 23, 42, 0.5)",
+    font=dict(color="#E2E8F0", family="Plus Jakarta Sans, sans-serif"),
     yaxis_title="Temperature (°C)",
     xaxis_title="Time / Hour",
     margin=dict(l=20, r=20, t=30, b=20)
@@ -128,6 +133,7 @@ with col_g1:
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(15, 23, 42, 0.5)",
+        font=dict(color="#E2E8F0", family="Plus Jakarta Sans, sans-serif"),
         yaxis_title="Heat Loss Rate (Watts)",
         xaxis_title="Time / Hour",
         margin=dict(l=20, r=20, t=30, b=20)
@@ -147,11 +153,14 @@ with col_g2:
         hole=0.45,
         color_discrete_sequence=px.colors.qualitative.Pastel
     )
+    fig_pie.update_traces(textfont=dict(color='#0B1120', size=12))
     fig_pie.update_layout(
         height=380,
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(15, 23, 42, 0.5)",
+        font=dict(color="#E2E8F0", family="Plus Jakarta Sans, sans-serif"),
+        legend=dict(font=dict(color="#E2E8F0")),
         margin=dict(l=20, r=20, t=30, b=20)
     )
     st.plotly_chart(fig_pie, use_container_width=True)
@@ -192,6 +201,8 @@ fig_3d.update_layout(
     height=550,
     template="plotly_dark",
     paper_bgcolor="rgba(0,0,0,0)",
+    font=dict(color="#E2E8F0", family="Plus Jakarta Sans, sans-serif"),
+    coloraxis_colorbar=dict(tickfont=dict(color="#E2E8F0")),
     margin=dict(l=10, r=10, t=30, b=10)
 )
 

@@ -127,7 +127,9 @@ if run_opt_btn or "opt_results" in st.session_state:
         height=480,
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(15, 23, 42, 0.5)"
+        plot_bgcolor="rgba(15, 23, 42, 0.5)",
+        font=dict(color="#E2E8F0", family="Plus Jakarta Sans, sans-serif"),
+        coloraxis_colorbar=dict(tickfont=dict(color="#E2E8F0"), title_font=dict(color="#E2E8F0"))
     )
 
     st.plotly_chart(fig_scatter, use_container_width=True)

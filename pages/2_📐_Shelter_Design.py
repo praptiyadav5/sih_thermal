@@ -42,9 +42,15 @@ with tab_geom:
         cur_h = float(st.session_state.shelter_config.get("height", 2.4))
         cur_shape = st.session_state.shelter_config.get("shape", "Rectangular")
 
-        st.session_state.shelter_config["length"] = st.slider("Shelter Length (m)", 3.0, 15.0, min(max(3.0, cur_l), 15.0), 0.5)
-        st.session_state.shelter_config["width"] = st.slider("Shelter Width (m)", 2.5, 10.0, min(max(2.5, cur_w), 10.0), 0.5)
-        st.session_state.shelter_config["height"] = st.slider("Eave Height (m)", 1.8, 5.0, min(max(1.8, cur_h), 5.0), 0.1)
+        st.session_state.shelter_config["length"] = st.number_input(
+            "Shelter Length (m)", min_value=3.0, max_value=15.0, value=min(max(3.0, cur_l), 15.0), step=0.5, format="%.1f"
+        )
+        st.session_state.shelter_config["width"] = st.number_input(
+            "Shelter Width (m)", min_value=2.5, max_value=10.0, value=min(max(2.5, cur_w), 10.0), step=0.5, format="%.1f"
+        )
+        st.session_state.shelter_config["height"] = st.number_input(
+            "Eave Height (m)", min_value=1.8, max_value=5.0, value=min(max(1.8, cur_h), 5.0), step=0.1, format="%.1f"
+        )
         
         shapes_list = ["Rectangular", "Gable", "Dome/Arch", "Monoslope"]
         shape_idx = shapes_list.index(cur_shape) if cur_shape in shapes_list else 0
@@ -55,12 +61,18 @@ with tab_geom:
         cur_door = float(st.session_state.shelter_config.get("door_area", 2.0))
         cur_orient = int(st.session_state.shelter_config.get("orientation_deg", 0))
 
-        st.session_state.shelter_config["window_area"] = st.slider("Window Glazing Area (m²)", 0.0, 10.0, min(max(0.0, cur_win), 10.0), 0.2)
-        st.session_state.shelter_config["door_area"] = st.slider("Door Openings Area (m²)", 1.0, 5.0, min(max(1.0, cur_door), 5.0), 0.1)
-        
+        st.session_state.shelter_config["window_area"] = st.number_input(
+            "Window Glazing Area (m²)", min_value=0.0, max_value=10.0, value=min(max(0.0, cur_win), 10.0), step=0.2, format="%.1f"
+        )
+        st.session_state.shelter_config["door_area"] = st.number_input(
+            "Door Openings Area (m²)", min_value=1.0, max_value=5.0, value=min(max(1.0, cur_door), 5.0), step=0.1, format="%.1f"
+        )
+
         # Round orientation to step 5 to prevent step mismatches
         safe_orient = int(round(cur_orient / 5.0) * 5)
-        st.session_state.shelter_config["orientation_deg"] = st.slider("Azimuth Orientation (° South = 0°)", -90, 90, min(max(-90, safe_orient), 90), 5)
+        st.session_state.shelter_config["orientation_deg"] = st.number_input(
+            "Azimuth Orientation (° South = 0°)", min_value=-90, max_value=90, value=min(max(-90, safe_orient), 90), step=5
+        )
 
     with col2:
         st.markdown("#### 🧊 Interactive 3D CAD Building Preview")
@@ -103,11 +115,11 @@ with tab_wall:
     with col_w1:
         st.markdown("#### Primary Wall Layer 1 (Structural)")
         w1_mat = st.selectbox("Layer 1 Material", mat_options, index=0, key="w1_mat")
-        w1_thick = st.slider("Layer 1 Thickness (m)", 0.05, 0.50, 0.30, 0.01, key="w1_thick")
+        w1_thick = st.number_input("Layer 1 Thickness (m)", min_value=0.05, max_value=0.50, value=0.30, step=0.01, format="%.2f", key="w1_thick")
 
         st.markdown("#### Wall Layer 2 (Thermal Insulation)")
         w2_mat = st.selectbox("Layer 2 Material", mat_options, index=min(4, len(mat_options)-1), key="w2_mat")
-        w2_thick = st.slider("Layer 2 Thickness (m)", 0.0, 0.25, 0.08, 0.01, key="w2_thick")
+        w2_thick = st.number_input("Layer 2 Thickness (m)", min_value=0.0, max_value=0.25, value=0.08, step=0.01, format="%.2f", key="w2_thick")
 
         w1_info = mat_db.get_material_by_name(w1_mat) or mat_db.get_material_by_id('mud_brick')
         w2_info = mat_db.get_material_by_name(w2_mat) or mat_db.get_material_by_id('xps_insulation')
@@ -147,6 +159,7 @@ with tab_wall:
                 template="plotly_dark",
                 paper_bgcolor="rgba(0,0,0,0)",
                 plot_bgcolor="rgba(15, 23, 42, 0.6)",
+                font=dict(color="#E2E8F0", family="Plus Jakarta Sans, sans-serif"),
                 showlegend=False,
                 margin=dict(l=10, r=10, t=30, b=10)
             )
@@ -162,11 +175,11 @@ with tab_roof:
     with col_r1:
         st.markdown("#### Primary Roof Insulation Layer")
         r1_mat = st.selectbox("Roof Insulation Material", mat_options, index=min(6, len(mat_options)-1), key="r1_mat")
-        r1_thick = st.slider("Roof Insulation Thickness (m)", 0.02, 0.30, 0.10, 0.01, key="r1_thick")
+        r1_thick = st.number_input("Roof Insulation Thickness (m)", min_value=0.02, max_value=0.30, value=0.10, step=0.01, format="%.2f", key="r1_thick")
 
         st.markdown("#### Inner Structural Ceiling Layer")
         r2_mat = st.selectbox("Ceiling Lining Material", mat_options, index=min(8, len(mat_options)-1), key="r2_mat")
-        r2_thick = st.slider("Ceiling Lining Thickness (m)", 0.01, 0.10, 0.04, 0.005, key="r2_thick")
+        r2_thick = st.number_input("Ceiling Lining Thickness (m)", min_value=0.01, max_value=0.10, value=0.04, step=0.005, format="%.3f", key="r2_thick")
 
         r1_info = mat_db.get_material_by_name(r1_mat) or mat_db.get_material_by_id('pu_foam')
         r2_info = mat_db.get_material_by_name(r2_mat) or mat_db.get_material_by_id('timber_wood')
@@ -196,11 +209,11 @@ with tab_floor:
     with col_f1:
         st.markdown("#### Structural Base Slab")
         f1_mat = st.selectbox("Base Slab Material", mat_options, index=min(3, len(mat_options)-1), key="f1_mat")
-        f1_thick = st.slider("Base Slab Thickness (m)", 0.05, 0.30, 0.15, 0.01, key="f1_thick")
+        f1_thick = st.number_input("Base Slab Thickness (m)", min_value=0.05, max_value=0.30, value=0.15, step=0.01, format="%.2f", key="f1_thick")
 
         st.markdown("#### Under-Slab Thermal Insulation")
         f2_mat = st.selectbox("Under-Slab Insulation", mat_options, index=min(4, len(mat_options)-1), key="f2_mat")
-        f2_thick = st.slider("Under-Slab Insulation Thickness (m)", 0.02, 0.20, 0.06, 0.01, key="f2_thick")
+        f2_thick = st.number_input("Under-Slab Insulation Thickness (m)", min_value=0.02, max_value=0.20, value=0.06, step=0.01, format="%.2f", key="f2_thick")
 
         f1_info = mat_db.get_material_by_name(f1_mat) or mat_db.get_material_by_id('concrete')
         f2_info = mat_db.get_material_by_name(f2_mat) or mat_db.get_material_by_id('xps_insulation')

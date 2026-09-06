@@ -160,9 +160,14 @@ fig.update_layout(
     template="plotly_dark",
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(15, 23, 42, 0.5)",
+    font=dict(color="#E2E8F0", family="Plus Jakarta Sans, sans-serif"),
     margin=dict(l=20, r=20, t=35, b=20),
     showlegend=False
 )
+
+# Ensure subplot title annotations are clearly visible against the dark background
+for ann in fig['layout']['annotations']:
+    ann['font'] = dict(color="#F1F5F9", size=13)
 
 st.plotly_chart(fig, use_container_width=True)
 

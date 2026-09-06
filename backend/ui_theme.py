@@ -251,6 +251,111 @@ def inject_custom_css():
             border-radius: 10px;
             font-weight: 600;
         }
+
+        /* =========================================================
+           TEXT VISIBILITY FIXES (inline code, code blocks, radio,
+           multiselect tags, metrics, number inputs, dataframes)
+           ========================================================= */
+
+        /* Inline <code> tags used inside glass-card HTML (e.g. <code>value</code>) */
+        .stMarkdown code, .glass-card code, p code, div code {
+            color: #7DD3FC !important;
+            background: rgba(56, 189, 248, 0.12) !important;
+            padding: 1px 6px !important;
+            border-radius: 4px !important;
+            font-family: 'Fira Code', monospace !important;
+        }
+
+        /* st.code() blocks (e.g. PyMechanical script preview) */
+        div[data-testid="stCodeBlock"] {
+            background-color: #0B1120 !important;
+            border: 1px solid rgba(255, 255, 255, 0.10) !important;
+            border-radius: 10px !important;
+        }
+        div[data-testid="stCodeBlock"] pre,
+        div[data-testid="stCodeBlock"] code,
+        div[data-testid="stCodeBlock"] span {
+            color: #E2E8F0 !important;
+            background-color: transparent !important;
+        }
+
+        /* Radio button option labels (e.g. location input method selector) */
+        .stRadio [role="radiogroup"] label,
+        .stRadio [role="radiogroup"] label p,
+        .stRadio [role="radiogroup"] label span,
+        .stRadio [role="radiogroup"] label div {
+            color: #F1F5F9 !important;
+        }
+
+        /* Multiselect selected-item tags (e.g. design preset picker) */
+        div[data-baseweb="tag"] {
+            background-color: rgba(37, 99, 235, 0.85) !important;
+        }
+        div[data-baseweb="tag"] span,
+        div[data-baseweb="tag"] svg {
+            color: #FFFFFF !important;
+            fill: #FFFFFF !important;
+        }
+
+        /* Number input fields (manual typing controls) */
+        div[data-testid="stNumberInput"] input {
+            background-color: #0F172A !important;
+            color: #F8FAFC !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 8px !important;
+        }
+        div[data-testid="stNumberInput"] button {
+            background-color: #1E293B !important;
+            color: #F8FAFC !important;
+        }
+        div[data-testid="stNumberInput"] button svg {
+            fill: #F8FAFC !important;
+        }
+
+        /* Native st.metric widgets */
+        [data-testid="stMetricLabel"] * {
+            color: #94A3B8 !important;
+        }
+        [data-testid="stMetricValue"] {
+            color: #F8FAFC !important;
+        }
+        [data-testid="stMetricDelta"] * {
+            color: inherit !important;
+        }
+
+        /* Dataframes / tables */
+        [data-testid="stDataFrame"] {
+            background-color: rgba(15, 23, 42, 0.4) !important;
+        }
+
+        /* Text areas & captions */
+        .stCaption, [data-testid="stCaptionContainer"] * {
+            color: #94A3B8 !important;
+        }
+
+        /* =========================================================
+           HIDE DEFAULT STREAMLIT CHROME (header / footer / menu / badge)
+           ========================================================= */
+        header[data-testid="stHeader"] {
+            visibility: hidden !important;
+            height: 0 !important;
+            min-height: 0 !important;
+        }
+        footer, #MainMenu, [data-testid="stToolbar"], [data-testid="stDecoration"] {
+            visibility: hidden !important;
+            height: 0 !important;
+        }
+        .viewerBadge_container__1QSob, .viewerBadge_link__1S137, .viewerBadge_text__1JaDK {
+            display: none !important;
+        }
+
+        /* Reclaim the space the header used to occupy */
+        .block-container {
+            padding-top: 1.5rem !important;
+        }
+        [data-testid="stSidebarNav"] {
+            padding-top: 0.5rem !important;
+        }
     </style>
     """, unsafe_allow_html=True)
 

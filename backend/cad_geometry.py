@@ -127,8 +127,9 @@ def generate_shelter_3d_cad_figure(length, width, height, shape="Rectangular", w
         ),
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#E2E8F0", family="Plus Jakarta Sans, sans-serif"),
         margin=dict(l=0, r=0, t=10, b=0),
-        legend=dict(x=0.02, y=0.98, bgcolor="rgba(15,23,42,0.8)")
+        legend=dict(x=0.02, y=0.98, bgcolor="rgba(15,23,42,0.8)", font=dict(color="#F1F5F9"))
     )
     return fig
 
