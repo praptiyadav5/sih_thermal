@@ -5,8 +5,13 @@ from plotly.subplots import make_subplots
 import pandas as pd
 
 from backend.ui_theme import inject_custom_css, render_hero_banner
+from backend.session_state import ensure_session_state
 
-st.set_page_config(page_title="Climate Conditions | Thermal Shelter", page_icon="🌤️", layout="wide")
+try:
+    st.set_page_config(page_title="Climate Conditions | Thermal Shelter", page_icon="🌤️", layout="wide")
+except Exception:
+    pass
+ensure_session_state()
 inject_custom_css()
 
 weather_mgr = st.session_state.weather_mgr

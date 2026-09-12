@@ -6,8 +6,13 @@ import numpy as np
 
 from backend.optimizer import ThermalOptimizer
 from backend.ui_theme import inject_custom_css, render_hero_banner
+from backend.session_state import ensure_session_state
 
-st.set_page_config(page_title="Optimization | Thermal Shelter", page_icon="🚀", layout="wide")
+try:
+    st.set_page_config(page_title="Optimization | Thermal Shelter", page_icon="🚀", layout="wide")
+except Exception:
+    pass
+ensure_session_state()
 inject_custom_css()
 
 mat_db = st.session_state.mat_db
@@ -137,4 +142,4 @@ if run_opt_btn or "opt_results" in st.session_state:
     st.divider()
 
     st.subheader("🔝 Top 10 Pareto Optimal Shelter Designs")
-    st.dataframe(top_10.drop(columns=['optimization_score']), use_container_width=True)
+    st.dataframe(top_10.drop(columns=['optimization_score']), width="stretch")

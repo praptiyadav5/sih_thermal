@@ -7,8 +7,13 @@ import numpy as np
 from backend.materials import MaterialDatabase
 from backend.simulation import ThermalSimulationEngine
 from backend.ui_theme import inject_custom_css, render_hero_banner
+from backend.session_state import ensure_session_state
 
-st.set_page_config(page_title="Comparison | Thermal Shelter", page_icon="⚖️", layout="wide")
+try:
+    st.set_page_config(page_title="Comparison | Thermal Shelter", page_icon="⚖️", layout="wide")
+except Exception:
+    pass
+ensure_session_state()
 inject_custom_css()
 
 mat_db = st.session_state.mat_db
@@ -221,7 +226,7 @@ with tab_presets:
 
         # Ranking Data Table
         st.subheader("📋 Comprehensive Benchmarking Table")
-        st.dataframe(df_sum.drop(columns=['Full Name']), use_container_width=True)
+        st.dataframe(df_sum.drop(columns=['Full Name']), width="stretch")
 
 # ===========================================================
 # TAB 2: CUSTOM MATERIAL & SHAPE COMPARISON (NEW)
@@ -433,7 +438,7 @@ with tab_custom:
     st.divider()
 
     st.subheader("📋 Custom Comparison Table")
-    st.dataframe(df_csum, use_container_width=True)
+    st.dataframe(df_csum, width="stretch")
 
 st.divider()
 
