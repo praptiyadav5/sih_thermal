@@ -1,3 +1,4 @@
+
 import os
 import sys
 import streamlit as st
@@ -5,6 +6,7 @@ import streamlit as st
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from backend.session_state import ensure_session_state
+from backend.chatbot import render_chatbot
 
 st.set_page_config(
     page_title="Thermal Shelter Studio",
@@ -13,11 +15,8 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Initialize shared application state
 ensure_session_state()
 
-# Streamlit Multi-Page Navigation Router
-# Defines clean sidebar page list and removes 'app' entry from sidebar
 pg = st.navigation(
     [
         st.Page("pages/1_🏠_Home.py", title="Home", icon="🏠", default=True),
@@ -28,8 +27,11 @@ pg = st.navigation(
         st.Page("pages/6_⚖️_Comparison.py", title="Comparison", icon="⚖️"),
         st.Page("pages/7_🚀_Optimization.py", title="Optimization", icon="🚀"),
     ],
-    position="sidebar"
+    position="sidebar",
 )
 
-pg.run()
+# Display the floating chatbot
+render_chatbot()
 
+# Run the selected page
+pg.run()
